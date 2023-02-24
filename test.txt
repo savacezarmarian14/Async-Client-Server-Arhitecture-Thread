@@ -1,0 +1,9 @@
+Most of the xv6 code for manipulating address spaces and page tables resides in vm.c (ker-
+nel/vm.c:1). The central data structure is pagetable_t, which is really a pointer to a RISC-V
+root page-table page; a pagetable_t may be either the kernel page table, or one of the per-
+process page tables. The central functions are walk, which finds the PTE for a virtual address,
+and mappages, which installs PTEs for new mappings. Functions starting with kvm manipulate
+the kernel page table; functions starting with uvm manipulate a user page table; other functions are
+used for both. copyout and copyin copy data to and from user virtual addresses provided as
+system call arguments; they are in vm.c because they need to explicitly translate those addresses
+in order to find the corresponding physical memory.
